@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             handleLogin()
         }
+        if(LoginPreferences(applicationContext).getUserInfo().id?.isNotEmpty() == true){
+            startActivity(Intent(applicationContext, HomeActivity::class.java))
+        }
         binding.btnRegister.setOnClickListener {
             val intentReg = Intent(applicationContext, RegisterActivity::class.java)
             startActivity(intentReg)

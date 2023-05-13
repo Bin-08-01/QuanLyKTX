@@ -51,14 +51,14 @@ class UserFragment : Fragment() {
         userInfo = LoginPreferences(requireContext()).getUserInfo()
         binding.nameInfo.text = userInfo.name
         binding.idInfo.text = userInfo.id
-        binding.genderInfo.text = userInfo.gender
+        binding.genderInfo.text = userInfo.gender?. let { "Chưa cập nhập" }
         binding.dateInfo.text = userInfo.date
         binding.classInfo.text = userInfo.cls
         binding.departmentInfo.text = userInfo.department
-        binding.roomInfo.text = userInfo.room
-        binding.dateJoinedInfo.text = userInfo.dateJoined
-        binding.expiryInfo.text = userInfo.expiry
-        binding.statusPriceInfo.text = userInfo.status
+        binding.roomInfo.text = userInfo.room?. let { "Bạn chưa đăng ký" }
+        binding.dateJoinedInfo.text = userInfo.dateJoined?. let { "Đang cập nhập" }
+        binding.expiryInfo.text = userInfo.expiry?. let { "Đang cập nhập" }
+        binding.statusPriceInfo.text = userInfo.status?. let { "Đang cập nhập" }
     }
 
     companion object {

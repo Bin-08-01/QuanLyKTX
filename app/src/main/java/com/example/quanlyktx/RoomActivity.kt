@@ -1,5 +1,7 @@
 package com.example.quanlyktx
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +14,9 @@ import com.example.quanlyktx.model.UserModel
 import com.example.quanlyktx.model.UserRegRoomModel
 import com.example.quanlyktx.store.LoginPreferences
 import com.google.firebase.database.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class RoomActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRoomBinding
@@ -28,7 +33,7 @@ class RoomActivity : AppCompatActivity() {
         binding.btnRegRoomDetailroom.setOnClickListener {
             if (LoginPreferences(applicationContext).getUserInfo().room?.length == 0) {
                 handleRegister()
-            } else {
+            }else if(roomInfo.numPersons?.toInt()!! <= roomInfo.persons?.size!!) else {
                 Toast.makeText(
                     this@RoomActivity,
                     "Bạn đã đăng ký phòng khác, vui lòng truy cập vào hồ sơ cá nhân!!!",
@@ -43,26 +48,63 @@ class RoomActivity : AppCompatActivity() {
         val userInfo = LoginPreferences(applicationContext).getUserInfo()
         FirebaseDatabase.getInstance()
             .getReference("${intent.getStringExtra("link").toString()}/persons")
-            .child(userInfo.id.toString())
-            .setValue(UserRegRoomModel(
-                userInfo.cls.toString(),
-                userInfo.date.toString(),
-                userInfo.dateJoined.toString(),
-                userInfo.department.toString(),
-                userInfo.expiry.toString(),
-                userInfo.id.toString(),
-                userInfo.name.toString(),
-                userInfo.status.toString()
-            ))
-        Toast.makeText(
-            this@RoomActivity,
-            "Đăng ký thành công, vui lòng thanh toán ở tổ ktx!!!",
-            Toast.LENGTH_SHORT
-        ).show()
+            .orderByKey().limitToLast(1)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var lastKey = "0"
+                    for (child in snapshot.children) {
+                        lastKey = child.key!!
+                    }
+                    val newKey = (lastKey.toInt() + 1).toString()
+                    val currentTime = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    val timeJoined = currentTime.format(formatter)
+                    FirebaseDatabase.getInstance()
+                        .getReference("${intent.getStringExtra("link").toString()}/persons")
+                        .child(newKey).setValue(
+                            UserRegRoomModel(
+                                userInfo.cls.toString(),
+                                userInfo.date.toString(),
+                                timeJoined,
+                                userInfo.department.toString(),
+                                "Đang chờ xử lý",
+                                userInfo.id.toString(),
+                                userInfo.name.toString(),
+                                "Đang chờ xử lý"
+                            )
+                        )
+                    Toast.makeText(
+                        this@RoomActivity,
+                        "Đăng ký thành công, vui lòng thanh toán ở tổ ktx!!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(applicationContext, HomeActivity::class.java))
+                    LoginPreferences(applicationContext).setValue("room", roomInfo.id.toString())
+                    LoginPreferences(applicationContext).setValue("dateJoined", timeJoined)
+                    LoginPreferences(applicationContext).setValue("status", "Đang chờ xử lý")
+                    updateInfoUser(LoginPreferences(applicationContext).getUserInfo().id.toString(), roomInfo.id.toString(), timeJoined)
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+    }
+
+    private fun updateInfoUser(toString: String, room: String, timeJoined: String) {
+        val db = FirebaseDatabase.getInstance().getReference("Users/$toString")
+        val updates = hashMapOf<String, Any>(
+            "room" to room,
+            "dateJoined" to timeJoined,
+            "status" to "Đang chờ xử lý"
+        )
+        db.updateChildren(updates)
     }
 
     private fun getData() {
         dbRef.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     roomInfo = snapshot.getValue(RoomModel::class.java)!!

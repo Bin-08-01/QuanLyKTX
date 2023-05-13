@@ -47,4 +47,10 @@ class LoginPreferences(context: Context) {
     fun clearInfo(){
         preferences!!.edit().clear().apply()
     }
+
+    fun setValue(type: String, data: String){
+        val editor = preferences!!.edit()
+        editor.putString(type, data)
+        editor.apply()
+    }
 }
