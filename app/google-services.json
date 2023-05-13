@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "899389781639",
+    "firebase_url": "https://ktx-manager-1915f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ktx-manager-1915f",
+    "storage_bucket": "ktx-manager-1915f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899389781639:android:f2d451a045f5be0a4d6a22",
+        "android_client_info": {
+          "package_name": "com.example.quanlyktx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899389781639-2jk980v83bqoaureisai7kt5hp9v5j1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR5vAR0sNt1WbVFz8SucN_v8fxI_Xw5Ww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899389781639-2jk980v83bqoaureisai7kt5hp9v5j1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

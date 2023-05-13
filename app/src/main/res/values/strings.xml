@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QuanLyKTX</string>
+    <string name="building_number">Building number</string>
+    <string name="loading_data">Loading...</string>
+    <string name="new_building">New building</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
