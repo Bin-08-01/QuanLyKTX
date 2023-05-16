@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                             snapshot.child("expiry").value.toString(),
                             snapshot.child("gender").value.toString(),
                             snapshot.child("room").value.toString(),
+                            snapshot.child("avatar").value.toString()
                             )
                         LoginPreferences(applicationContext).saveInfo(user)
                         Toast.makeText(

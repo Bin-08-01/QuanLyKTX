@@ -8,7 +8,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello"/>
+        android:text="Chào mừng đến với KTX Việt Hàn"
+        android:textStyle="bold|italic"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="12dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvBuilding"
         android:layout_width="match_parent"

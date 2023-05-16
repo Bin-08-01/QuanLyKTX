@@ -1,13 +1,16 @@
 package com.example.quanlyktx
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.quanlyktx.databinding.ActivityRegisterBinding
+import com.example.quanlyktx.dialog.GenderDialog
 import com.example.quanlyktx.model.UserModel
 import com.example.quanlyktx.model.UserRegModel
 import com.google.firebase.database.*
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -22,6 +25,30 @@ class RegisterActivity : AppCompatActivity() {
         }
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(applicationContext, MainActivity::class.java))
+        }
+        binding.edtDateReg.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, year, monthOfYear, dayOfMonth ->
+
+                    val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
+                    binding.edtDateReg.setText(selectedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+        binding.edtGender.setOnClickListener {
+            val dialog = GenderDialog(this, object : GenderDialog.GenderDialogListener {
+                override fun onGenderSelected(gender: String) {
+                    binding.edtGender.setText(gender)
+                }
+            })
+            dialog.setCancelable(true)
+            dialog.show()
         }
     }
 
@@ -69,7 +96,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "ID đã được đăng ký", Toast.LENGTH_SHORT).show()
                     binding.edtIdReg.error = "ID đã được đăng ký"
                 } else {
-                    val student = UserModel(idStudent, name, date, cls, dpm, passwd, "", "", "", "", "")
+                    val student = UserModel(idStudent, name, date, cls, dpm, passwd, "", "", "", binding.edtGender.text.toString(), "")
                     dbRef.child(idStudent).setValue(student)
                     Toast.makeText(applicationContext, "Đăng ký thành công!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(applicationContext, MainActivity::class.java))

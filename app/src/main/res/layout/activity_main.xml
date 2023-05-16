@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:src="@drawable/vkulogo"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -14,32 +24,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quản lý ký túc xá"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/black"
+            android:text="Quản lý ký túc xá"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="30sp"
-            android:layout_marginVertical="20dp"/>
-        <LinearLayout
-            android:layout_marginHorizontal="10dp"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/ch_o_m_ng_b_n_n_v_i_k_t_c_x_n_i_h_c_cntt_tt_vi_t_h_n"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:text="Mã sinh viên"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:text="Mã sinh viên"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edt_id_login"
@@ -48,17 +71,19 @@
                     android:layout_marginStart="10dp"
                     android:hint="ID Student" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:text="Mật khẩu"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:text="Mật khẩu"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edt_passwd_login"
@@ -68,38 +93,43 @@
                     android:hint="Password"
                     android:inputType="textPassword" />
             </LinearLayout>
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:text="Lưu ý:"
                 android:textColor="@color/black"
-                android:text="Lưu ý:"/>
+                android:textSize="16sp" />
+
             <TextView
-                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:layout_marginBottom="10dp"
+                android:text="Nếu bạn quên mật khẩu, hãy liên hệ với ban quản lý ký túc xá để xử lý"
                 android:textColor="@android:color/darker_gray"
-                android:text="Nếu bạn quên mật khẩu, hãy liên hệ với ban quản lý ký túc xá để xử lý"/>
+                android:textSize="14sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:layout_marginTop="20dp">
+                android:orientation="horizontal">
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đăng nhập"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:text="Đăng nhập" />
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đăng ký"
-                    android:layout_marginHorizontal="20dp"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:text="Đăng ký" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

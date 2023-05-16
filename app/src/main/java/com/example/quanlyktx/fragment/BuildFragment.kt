@@ -22,7 +22,8 @@ class BuildFragment : Fragment() {
     private lateinit var binding: FragmentBuildBinding
     private lateinit var dbRef: DatabaseReference
     private lateinit var listBuilding: ArrayList<BuildModel>
-//    private lateinit var listFloor: ArrayList<String>
+
+    //    private lateinit var listFloor: ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,17 +46,19 @@ class BuildFragment : Fragment() {
     private fun getBuildings() {
         binding.rcvBuilding.visibility = View.GONE
         binding.tvLoading.visibility = View.VISIBLE
-        dbRef.addValueEventListener(object : ValueEventListener{
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listBuilding.clear()
-                if(snapshot.exists()){
-                    for(child in snapshot.children){
+                if (snapshot.exists()) {
+                    for (child in snapshot.children) {
                         val buildData = child.getValue(BuildModel::class.java)
                         listBuilding.add(buildData!!)
                     }
-                    binding.rcvBuilding.layoutManager = GridLayoutManager(context, 2)
+//                    binding.rcvBuilding.layoutManager = GridLayoutManager(context, 2)
+                    binding.rcvBuilding.layoutManager = LinearLayoutManager(context)
+
                     val adapter = BuildingAdapter(listBuilding)
-                    adapter.setOnItemClickListener(object : BuildingAdapter.OnBuildClickListener{
+                    adapter.setOnItemClickListener(object : BuildingAdapter.OnBuildClickListener {
                         override fun onClickBuild(position: Int) {
                             val intentBuild = Intent(context, FloorActivity::class.java)
                             intentBuild.putExtra("idBuild", listBuilding[position].id)

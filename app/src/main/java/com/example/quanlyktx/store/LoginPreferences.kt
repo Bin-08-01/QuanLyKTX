@@ -25,6 +25,7 @@ class LoginPreferences(context: Context) {
         editor.putString("expiry", userInfo.expiry)
         editor.putString("gender", userInfo.gender)
         editor.putString("room", userInfo.room)
+        editor.putString("avatar", userInfo.avatar)
         editor.apply()
     }
 
@@ -40,7 +41,8 @@ class LoginPreferences(context: Context) {
             preferences!!.getString("status", ""),
             preferences!!.getString("expiry", ""),
             preferences!!.getString("gender", ""),
-            preferences!!.getString("room", "")
+            preferences!!.getString("room", ""),
+            preferences!!.getString("avatar", "")
         )
     }
 

@@ -126,7 +126,7 @@ class FloorActivity : AppCompatActivity() {
                 }
 
             })
-        binding.rcvRoom.layoutManager = GridLayoutManager(this, 1)
+        binding.rcvRoom.layoutManager = GridLayoutManager(this, 2)
         val adapterRoom = RoomAdapter(listRoom)
         adapterRoom.setOnItemClickListener(object : RoomAdapter.OnBuildClickListener {
             override fun onClickBuild(position: Int) {

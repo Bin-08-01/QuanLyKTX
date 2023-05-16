@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.quanlyktx.adapter.PersonAdapter
@@ -33,7 +34,17 @@ class RoomActivity : AppCompatActivity() {
         binding.btnRegRoomDetailroom.setOnClickListener {
             if (LoginPreferences(applicationContext).getUserInfo().room?.length == 0) {
                 handleRegister()
-            }else if(roomInfo.numPersons?.toInt()!! <= roomInfo.persons?.size!!) else {
+            }
+//            else if (roomInfo.persons?.isEmpty() != true) {
+//                if (roomInfo.numPersons?.toInt()!! <= roomInfo.persons?.size!!) {
+//                    Toast.makeText(
+//                        this@RoomActivity,
+//                        "Phòng này đã đủ người!!!",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//            }
+            else {
                 Toast.makeText(
                     this@RoomActivity,
                     "Bạn đã đăng ký phòng khác, vui lòng truy cập vào hồ sơ cá nhân!!!",
@@ -70,7 +81,8 @@ class RoomActivity : AppCompatActivity() {
                                 "Đang chờ xử lý",
                                 userInfo.id.toString(),
                                 userInfo.name.toString(),
-                                "Đang chờ xử lý"
+                                "Đang chờ xử lý",
+                                userInfo.avatar
                             )
                         )
                     Toast.makeText(
@@ -82,10 +94,19 @@ class RoomActivity : AppCompatActivity() {
                     LoginPreferences(applicationContext).setValue("room", roomInfo.id.toString())
                     LoginPreferences(applicationContext).setValue("dateJoined", timeJoined)
                     LoginPreferences(applicationContext).setValue("status", "Đang chờ xử lý")
-                    updateInfoUser(LoginPreferences(applicationContext).getUserInfo().id.toString(), roomInfo.id.toString(), timeJoined)
+                    updateInfoUser(
+                        LoginPreferences(applicationContext).getUserInfo().id.toString(),
+                        roomInfo.id.toString(),
+                        timeJoined
+                    )
                 }
+
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(
+                        this@RoomActivity,
+                        "Có lỗi xảy ra, vui lòng thử lại sau!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             })
@@ -114,7 +135,9 @@ class RoomActivity : AppCompatActivity() {
                     binding.statusRoomDetail.text = roomInfo.status
                     binding.typeRoomDetail.text = roomInfo.type
                     binding.personRoomDetail.text = roomInfo.numPersons
-
+                    binding.titleListUser.text = "Danh sách người ở (${roomInfo.persons?.size?.minus(
+                        1
+                    )}/${roomInfo.numPersons})"
                 }
             }
 
@@ -141,11 +164,9 @@ class RoomActivity : AppCompatActivity() {
                         adapter.setOnItemClickListener(object :
                             PersonAdapter.OnPersonClickListener {
                             override fun onClickBuild(position: Int) {
-                                Toast.makeText(
-                                    this@RoomActivity,
-                                    listUser[position].name,
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                val intentUserInfo = Intent(applicationContext, UserInfoActivity::class.java)
+                                intentUserInfo.putExtra("idUser", listUser[position].id)
+                                startActivity(intentUserInfo)
                             }
 
                         })

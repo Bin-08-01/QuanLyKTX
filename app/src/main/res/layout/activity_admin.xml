@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminActivity"
+    android:orientation="vertical"
+    android:background="@android:color/darker_gray">
+    <TextView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chào mừng đến với KTX Việt Hàn\nĐây là trang admin, quản lý ktx"
+        android:textStyle="bold|italic"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="12dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:background="@color/white"
+        android:layout_marginTop="2dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đang có 3 đơn xét duyệt"
+            android:textSize="20dp"
+            android:textStyle="italic|bold"
+            android:textColor="@color/black"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:text="Xét duyệt"
+            android:paddingHorizontal="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=""-->
+<!--        </LinearLayout>-->
+    </LinearLayout>
+</LinearLayout>

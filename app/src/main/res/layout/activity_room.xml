@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,11 +14,11 @@
         android:id="@+id/tv_idroom_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="4dp"
         android:text="Số phòng"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:textColor="@android:color/holo_blue_dark"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -147,29 +148,40 @@
                 android:id="@+id/note_room_detail"
                 android:text="Ghi chú"/>
         </LinearLayout>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_reg_room_detailroom"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đăng ký phòng này"
-            android:paddingHorizontal="10dp"
-            android:background="@android:color/holo_blue_dark"
-            android:textColor="@color/white"
-            android:layout_marginVertical="10dp"
-            android:layout_gravity="right"
-            android:layout_marginHorizontal="20dp"/>
+            android:paddingVertical="6dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_reg_room_detailroom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:background="@android:color/holo_blue_dark"
+                android:paddingHorizontal="10dp"
+                android:text="Đăng ký phòng này"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/title_list_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Danh sách người ở"
             android:background="@color/white"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@android:color/holo_blue_dark"
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp"/>
         <androidx.recyclerview.widget.RecyclerView

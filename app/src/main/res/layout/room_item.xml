@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingHorizontal="6dp"
-    android:paddingVertical="20dp"
+    android:paddingBottom="20dp"
     android:background="@drawable/bg_build_item"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="4dp">
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ktx"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,13 +24,12 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@android:color/holo_blue_dark"/>
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:id="@+id/tv_status_room"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Trạng thái"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_status_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trạng thái"/>
     <LinearLayout
         android:layout_marginVertical="10dp"
         android:layout_width="match_parent"

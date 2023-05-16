@@ -1,5 +1,6 @@
 package com.example.quanlyktx
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -32,9 +33,8 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_search -> {
-                    if (LoginPreferences(applicationContext).getUserInfo().id === "admin") {
-                        Toast.makeText(applicationContext, "Admin", Toast.LENGTH_SHORT).show()
-
+                    if (LoginPreferences(applicationContext).getUserInfo().id.toString() == "admin") {
+                        startActivity(Intent(applicationContext, AdminActivity::class.java))
                     } else {
                         Toast.makeText(applicationContext, "Chỉ quản trị viên mới được sử dụng chức năng này", Toast.LENGTH_SHORT).show()
                     }
