@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.quanlyktx.adapter.PersonAdapter
 import com.example.quanlyktx.databinding.ActivityRoomBinding
+import com.example.quanlyktx.model.BillModel
 import com.example.quanlyktx.model.RoomModel
 import com.example.quanlyktx.model.UserModel
 import com.example.quanlyktx.model.UserRegRoomModel
@@ -90,6 +91,7 @@ class RoomActivity : AppCompatActivity() {
                         "Đăng ký thành công, vui lòng thanh toán ở tổ ktx!!!",
                         Toast.LENGTH_SHORT
                     ).show()
+                    handleBill()
                     startActivity(Intent(applicationContext, HomeActivity::class.java))
                     LoginPreferences(applicationContext).setValue("room", roomInfo.id.toString())
                     LoginPreferences(applicationContext).setValue("dateJoined", timeJoined)
@@ -111,6 +113,39 @@ class RoomActivity : AppCompatActivity() {
 
             })
 
+    }
+
+    private fun handleBill(){
+        val userInfo = LoginPreferences(applicationContext).getUserInfo()
+        val dbRe = FirebaseDatabase.getInstance().getReference("Bills")
+        dbRe.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val id = dbRe.push().key!!
+                    val currentDateTime = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    val formatted = currentDateTime.format(formatter)
+                    val bill = BillModel(id, userInfo.id, roomInfo.price, userInfo.name, "No", "Toà nhà ${intent.getStringExtra("idBuild")} - Phòng ${roomInfo.id}", formatted)
+                    dbRe.child(id).setValue(bill)
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Có lỗi xảy ra, vui lòng thử lại sau! 11",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(
+                    applicationContext,
+                    "Có lỗi xảy ra, vui lòng thử lại sau! 22",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+
+        })
     }
 
     private fun updateInfoUser(toString: String, room: String, timeJoined: String) {
@@ -135,9 +170,11 @@ class RoomActivity : AppCompatActivity() {
                     binding.statusRoomDetail.text = roomInfo.status
                     binding.typeRoomDetail.text = roomInfo.type
                     binding.personRoomDetail.text = roomInfo.numPersons
-                    binding.titleListUser.text = "Danh sách người ở (${roomInfo.persons?.size?.minus(
-                        1
-                    )}/${roomInfo.numPersons})"
+                    binding.titleListUser.text = "Danh sách người ở (${
+                        roomInfo.persons?.size?.minus(
+                            1
+                        )
+                    }/${roomInfo.numPersons})"
                 }
             }
 
@@ -164,7 +201,8 @@ class RoomActivity : AppCompatActivity() {
                         adapter.setOnItemClickListener(object :
                             PersonAdapter.OnPersonClickListener {
                             override fun onClickBuild(position: Int) {
-                                val intentUserInfo = Intent(applicationContext, UserInfoActivity::class.java)
+                                val intentUserInfo =
+                                    Intent(applicationContext, UserInfoActivity::class.java)
                                 intentUserInfo.putExtra("idUser", listUser[position].id)
                                 startActivity(intentUserInfo)
                             }

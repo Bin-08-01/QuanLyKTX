@@ -6,8 +6,8 @@
         android:icon="@drawable/home"/>
     <item
         android:id="@+id/navigation_search"
-        android:title="Search"
-        android:icon="@drawable/search"/>
+        android:title="Admin"
+        android:icon="@drawable/admin"/>
 <!--    <item-->
 <!--        android:id="@+id/navigation_notifications"-->
 <!--        android:title="Notifications"-->

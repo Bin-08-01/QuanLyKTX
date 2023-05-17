@@ -15,6 +15,9 @@
         android:theme="@style/Theme.QuanLyKTX"
         tools:targetApi="31">
         <activity
+            android:name=".BillActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserRoomInfoActivity"
             android:exported="false" />
         <activity

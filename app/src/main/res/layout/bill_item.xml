@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginVertical="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingBottom="4dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/n_order_bill_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên hoá đơn"
+            android:textSize="20dp"
+            android:paddingHorizontal="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_dark"
+            android:paddingVertical="10dp"/>
+        <TextView
+            android:id="@+id/date_bill_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:text="Ngày"
+            android:gravity="right"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_id_user_bill_item"
+            android:paddingHorizontal="10dp"
+            android:text="Tên - Mã sinh viên"/>
+        <TextView
+            android:id="@+id/txt_build_room_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Toà nhà - Tầng - Phòng"
+            android:paddingHorizontal="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:textStyle="bold"
+                    android:text="Giá tiền"/>
+                <TextView
+                    android:id="@+id/price_bill_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giá tiền"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="@android:color/holo_red_light"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_confirm_bill_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Xác nhận"
+                    android:textColor="@color/white"
+                    android:background="@android:color/holo_blue_dark"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
